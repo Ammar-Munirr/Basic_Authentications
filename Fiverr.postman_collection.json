@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "0fe45549-115e-4143-88bd-905b1e2b19c6",
+		"name": "Fiverr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26658813",
+		"_collection_link": "https://www.postman.com/lunar-space-412232/workspace/ammar-s/collection/26658813-0fe45549-115e-4143-88bd-905b1e2b19c6?action=share&source=collection_link&creator=26658813"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "munirammar0+1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Ammar_008",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BASE}}auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "sign up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "munirammar0+1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Ammar_008",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "Ammar_008",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ammar Second",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BASE}}register"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "me",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check if an environment is selected",
+									"if (pm.response.code === 200) {",
+									"    // Extract and print role from the JWT token",
+									"    const payload = decodeJWT(pm.response.json().access);",
+									"    if (payload) {",
+									"        const access_variable_name = \"user\" + \"_access_token\";",
+									"        const refresh_variable_name = \"user\" + \"_refresh_token\";",
+									"",
+									"        if (pm.environment.name) {",
+									"            // Environment is selected, set the variable in the environment",
+									"            pm.environment.set(access_variable_name, pm.response.json().access);",
+									"            pm.environment.set(refresh_variable_name, pm.response.json().refresh);",
+									"        } else {",
+									"            // No environment selected, set the variable at the collection level",
+									"            pm.collectionVariables.set(access_variable_name, pm.response.json().access);",
+									"            pm.collectionVariables.set(refresh_variable_name, pm.response.json().refresh);",
+									"        }",
+									"    }",
+									"}",
+									"// Function to decode JWT token",
+									"function decodeJWT(token) {",
+									"    try {",
+									"        const payload = token.split('.')[1];",
+									"        const decodedPayload = atob(payload);",
+									"        return JSON.parse(decodedPayload);",
+									"    } catch (error) {",
+									"        console.error(\"Error decoding JWT token: \", error);",
+									"        return null;",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}profile/me"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"decodeJWT = (token) => {",
+							"    try {",
+							"        const base64Url = token.split('.')[1];",
+							"        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');",
+							"        const decoded = atob(base64);",
+							"        const payload = JSON.parse(decoded);",
+							"        return payload;",
+							"    } catch (error) {",
+							"        console.error(\"Error decoding JWT token:\", error.message);",
+							"        return null;",
+							"    }",
+							"};"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE",
+			"value": "http://localhost:8000/api/",
+			"type": "string"
+		}
+	]
+}

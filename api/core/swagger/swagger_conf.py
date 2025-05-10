@@ -4,7 +4,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Application Name here",
+        title="Fiverr Assesment",
         default_version="v1",
         description="",
         contact=openapi.Contact(email="crymzee@crymzee.com"),

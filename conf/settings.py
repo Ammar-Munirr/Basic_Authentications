@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env_path = BASE_DIR / ".env"
-load_dotenv(dotenv_path=env_path)
+load_dotenv(dotenv_path=env_path, override=True)
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 IS_PROD = os.getenv("IS_PROD", "False").lower() == "true"

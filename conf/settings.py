@@ -35,6 +35,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "drf_yasg",
     "api.users",
+    "api.jwtauth",
 ]
 
 
@@ -143,9 +144,3 @@ SWAGGER_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "users.User"
-
-
-if IS_PROD:
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    USE_X_FORWARDED_HOST = True
-    SECURE_SSL_REDIRECT = True

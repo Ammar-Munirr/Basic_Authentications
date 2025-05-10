@@ -11,7 +11,9 @@
     ```bash
     python -m venv venv
     source venv/bin/activate
-4. Install the required Python packages:
+4. Crete a .env file within the project directory and setup the variables refer to the .env.example file:
+
+5. Install the required Python packages:
     ```bash
     pip install -r requirements.txt
 ## Usage
